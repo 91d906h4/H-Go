@@ -20,17 +20,18 @@ class DataReader:
 
         """
 
-        self.dir_path = dir_path
-        self.load_num = load_num
-        self.train_ratio = train_ratio
+        self.dir_path       = dir_path
+        self.load_num       = load_num
+        self.train_ratio    = train_ratio
 
-        self.raw_data = list()
-        self.clear_data = list()
+        # Set defualt values.
+        self.raw_data       = list()
+        self.clear_data     = list()
         self.converted_data = list()
-        self.train_data = list()
-        self.test_data = list()
+        self.train_data     = list()
+        self.test_data      = list()
         self.train_data_num = 0
-        self.test_data_num = 0
+        self.test_data_num  = 0
 
         # Call private method.
         self._read_raw_data()
