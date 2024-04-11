@@ -228,7 +228,9 @@ class DataReader:
                 step = row * 19 + col
 
                 # Append data.
-                self.train_data.append([game_data, step, winner])
+                # We add a dimension to winner because we will use nn.BCELoss()
+                # to calculate the loss.
+                self.train_data.append([game_data, step, [winner]])
 
                 # Update game queue.
                 game_queue.append(game_board.copy())
