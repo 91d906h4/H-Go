@@ -9,7 +9,7 @@ from collections import deque
 
 
 class DataReader:
-    def __init__(self, dir_path: str, load_num: int=-1) -> None:
+    def __init__(self, dir_path: str, load_num: int=-1, train_ratio: float=0.8) -> None:
         """DataReader class
 
         Reading the SGF files and converting them to training data.
@@ -22,18 +22,22 @@ class DataReader:
 
         self.dir_path = dir_path
         self.load_num = load_num
+        self.train_ratio = train_ratio
 
         self.raw_data = list()
         self.clear_data = list()
         self.converted_data = list()
         self.train_data = list()
+        self.test_data = list()
         self.train_data_num = 0
+        self.test_data_num = 0
 
         # Call private method.
         self._read_raw_data()
         self._clear_data()
         self._convert_data()
         self._make_training_data()
+        self._make_testing_data()
 
     def _read_raw_data(self) -> None:
         """_read_raw_data private method
@@ -248,6 +252,29 @@ class DataReader:
         # Print complete message.
         print(f"Make train data completed. ({time.time() - start_time:.2f} s)")
 
+    def _make_testing_data(self) -> None:
+        """_make_testing_data private method
+
+        Simpily split the train data into train and test data.        
+
+        """
+
+        # Return if the test data is already loaded.
+        if self.test_data: return
+
+        # Split train data into train and test data.
+        pointer = int(self.train_data_num * self.train_ratio)
+        temp = self.train_data
+        self.train_data = temp[:pointer]
+        self.test_data = temp[pointer:]
+
+        # Update the number of train and test data.
+        self.train_data_num = len(self.train_data)
+        self.test_data_num = len(self.test_data)
+
+        # Print complete message.
+        print(f"Split train and test data completed. ({self.train_data_num} train data, {self.test_data_num} test data).")
+
     def get_training_batch(self, batch_size: int=256, shuffle: bool=True) -> list:
         """get_training_batch public method
 
@@ -275,3 +302,26 @@ class DataReader:
             return random.sample(population=self.train_data, k=batch_size)
         else:
             return self.train_data[:batch_size]
+
+    def get_testing_batch(self, batch_size: int=256, shuffle: bool=True) -> list:
+        """get_testing_batch public method
+
+        Get the testing data batch.
+
+        Args:
+            batch_size (int): How many data to get. (default = 256)
+            shuffle (bool): Whether to shuffle the data. (default = True)
+
+        Returns:
+            list: The testing data batch containing (game_data, step, winner).
+
+        """
+
+        # Check if batch_size is -1.
+        if batch_size == -1:
+            batch_size = self.test_data_num
+
+        if shuffle:
+            return random.sample(population=self.test_data, k=batch_size)
+        else:
+            return self.test_data[:batch_size]
