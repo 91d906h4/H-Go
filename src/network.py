@@ -13,6 +13,7 @@ class Block(nn.Module):
         self.relu = nn.ReLU()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
+        # Clone the input tensor.
         y = x.clone()
 
         x = self.conv1(x)
@@ -22,6 +23,7 @@ class Block(nn.Module):
         x = self.conv2(x)
         x = self.bn2(x)
 
+        # Add the residual.
         x = x + y
 
         x = self.relu(x)
