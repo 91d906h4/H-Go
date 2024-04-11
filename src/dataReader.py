@@ -1,5 +1,6 @@
 import os
 import time
+import random
 import pathlib
 
 import numpy as np
@@ -26,6 +27,7 @@ class DataReader:
         self.clear_data = list()
         self.converted_data = list()
         self.train_data = list()
+        self.train_data_num = 0
 
         # Call private method.
         self._read_raw_data()
@@ -215,7 +217,7 @@ class DataReader:
                 game_data = list(np.full((1, 19, 19), fill_value=whos_turn)) + list(game_queue)
 
                 # Append data.
-                self.train_data.append((game_data, step, whos_turn, winner))
+                self.train_data.append((game_data, step, winner))
 
                 # Update game board.
                 row = step[0]
@@ -232,23 +234,36 @@ class DataReader:
             counter += 1
             print(f"Progess: {counter}/{total} ({counter / total * 100:.2f}%) ", end="\r")
 
+        # Get the number of train data.
+        self.train_data_num = len(self.train_data)
+
         # Print complete message.
         print(f"Make train data completed. ({time.time() - start_time:.2f} s)")
 
-    def get_train_data(self) -> list:
-        """get_train_data public method
+    def get_training_batch(self, batch_size: int=256, shuffle: bool=True) -> list:
+        """get_training_batch public method
 
-        Get the training data.
+        Get the training data batch.
+
+        Args:
+            batch_size (int): How many data to get. (default = 256)
+            shuffle (bool): Whether to shuffle the data. (default = True)
 
         Returns:
-            list: The training data containing (game_data, step, whos_turn, winner).
+            list: The training data batch containing (game_data, step, whos_turn, winner).
 
         Note:
             game_data: A list of 7 previous moves and the whos_turn layer is -1 or 1.
             step: The expected position of next move.
-            whos_turn: The move should be made by black (-1) or white (1).
             winner: The final winner of the game.
 
         """
 
-        return self.train_data
+        # Check if batch_size is -1.
+        if batch_size == -1:
+            batch_size = self.train_data_num
+
+        if shuffle:
+            return random.sample(population=self.train_data, k=batch_size)
+        else:
+            return self.train_data[:batch_size]
