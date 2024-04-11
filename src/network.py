@@ -4,13 +4,13 @@ from torch import nn
 
 
 class Block(nn.Module):
-    def __init__(self, in_channels: int, out_channels: int, kernel_size: int) -> None:
+    def __init__(self, in_channels: int, out_channels: int, kernel_size: int, padding: int=1) -> None:
         super(Block, self).__init__()
-        self.conv1 = nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size)
+        self.conv1 = nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size, padding=padding)
         self.bn1 = nn.BatchNorm2d(out_channels)
-        self.conv2 = nn.Conv2d(in_channels=out_channels, out_channels=out_channels, kernel_size=kernel_size)
+        self.conv2 = nn.Conv2d(in_channels=out_channels, out_channels=out_channels, kernel_size=kernel_size, padding=padding)
         self.bn2 = nn.BatchNorm2d(out_channels)
-        self.relu = nn.ReLU()
+        self.relu = nn.ReLU(inplace=True)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # Clone the input tensor.
@@ -39,17 +39,17 @@ class H_GO(nn.Module):
         self.tanh = nn.Tanh()
 
         self.layers = nn.Sequential(
-            Block(hidden_dim, hidden_dim, 3),
-            Block(hidden_dim, hidden_dim, 3),
-            Block(hidden_dim, hidden_dim, 3),
-            Block(hidden_dim, hidden_dim, 3),
-            Block(hidden_dim, hidden_dim, 3),
+            Block(hidden_dim, hidden_dim, 3, 1),
+            Block(hidden_dim, hidden_dim, 3, 1),
+            Block(hidden_dim, hidden_dim, 3, 1),
+            Block(hidden_dim, hidden_dim, 3, 1),
+            Block(hidden_dim, hidden_dim, 3, 1),
 
-            Block(hidden_dim, hidden_dim, 3),
-            Block(hidden_dim, hidden_dim, 3),
-            Block(hidden_dim, hidden_dim, 3),
-            Block(hidden_dim, hidden_dim, 3),
-            Block(hidden_dim, hidden_dim, 3),
+            Block(hidden_dim, hidden_dim, 3, 1),
+            Block(hidden_dim, hidden_dim, 3, 1),
+            Block(hidden_dim, hidden_dim, 3, 1),
+            Block(hidden_dim, hidden_dim, 3, 1),
+            Block(hidden_dim, hidden_dim, 3, 1),
         )
 
         self.policy = nn.Sequential(
