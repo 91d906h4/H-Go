@@ -250,7 +250,7 @@ class DataReader:
             shuffle (bool): Whether to shuffle the data. (default = True)
 
         Returns:
-            list: The training data batch containing (game_data, step, whos_turn, winner).
+            list: The training data batch containing (game_data, step, winner).
 
         Note:
             game_data: A list of 7 previous moves and the whos_turn layer is -1 or 1.
