@@ -120,7 +120,9 @@ class DataReader:
             if game_info[game_info.find("RE[") + 3] == "W":
                 winner = 1
             else:
-                winner = -1
+                # The black player should be -1, but we will use nn.BCELoss()
+                # to calculate the loss,  so we need to convert it to 0.
+                winner = 0
 
             self.clear_data.append((content, winner))
 
@@ -216,13 +218,17 @@ class DataReader:
                 # Make whos_turn layer.
                 game_data = list(np.full((1, 19, 19), fill_value=whos_turn)) + list(game_queue)
 
-                # Append data.
-                self.train_data.append((game_data, step, winner))
-
                 # Update game board.
                 row = step[0]
                 col = step[1]
                 game_board[row][col] = whos_turn
+
+                # Convert step to position.
+                row, col = step
+                step = row * 19 + col
+
+                # Append data.
+                self.train_data.append([game_data, step, winner])
 
                 # Update game queue.
                 game_queue.append(game_board.copy())
