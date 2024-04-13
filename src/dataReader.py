@@ -386,5 +386,3 @@ class DataReader:
             return random.sample(population=self.test_data, k=batch_size)
         else:
             return self.test_data[:batch_size]
-
-a = DataReader("../dataset/10k", 5000)
