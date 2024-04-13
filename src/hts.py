@@ -1,4 +1,5 @@
 import torch
+import random
 import numpy as np
 
 from network import H_GO
@@ -52,7 +53,7 @@ class HTS:
 
         self.root = Node(state=self.state, step=0, value=0)
 
-    def _select(self, state: deque, player: int) -> list:
+    def _select(self, state: deque, player: int, randomize: bool) -> list:
         """select publi method
 
         Select the most posible moves.
@@ -60,6 +61,7 @@ class HTS:
         Args:
             state (deque): The state of the game.
             player (int): The current player.
+            randomize (bool): Whether to randomize the selection.
 
         Retunrs:
             children (list): The possible children (moves) of input state.
@@ -76,6 +78,15 @@ class HTS:
 
         # Select the most probable moves.
         _, [policy] = torch.topk(policy, self.breadth)
+
+        if randomize:
+            # Remove the least probable moves.
+            length = int(len(policy) * (1 - self.temperature))
+
+            # Add random moves.
+            policy = list(policy[:length]) + [random.randint(1, 361) for _ in range(self.breadth - length)]
+
+            print(policy)
 
         for step in policy:
             temp_state = state.copy()
@@ -97,7 +108,7 @@ class HTS:
 
         return children
 
-    def _expand(self, state: deque, depth: int, node: Node, player: int) -> None:
+    def _expand(self, state: deque, depth: int, node: Node, player: int, randomize: bool) -> None:
         """expand publi method
 
         Expand the state with posible moves.
@@ -107,6 +118,7 @@ class HTS:
             depth (int): The current depth of this layer.
             node (Node): The current node.
             player (int): The current player.
+            randomize (bool): Whether to randomize the selection.
 
         """
 
@@ -114,12 +126,12 @@ class HTS:
         else: depth -= 1
 
         if len(node.children) == 0:
-            node.children = self._select(state=state, player=player)
+            node.children = self._select(state=state, player=player, randomize=randomize)
 
         player *= -1
 
         for child in node.children:
-            self._expand(state=state, depth=depth, node=child, player=player)
+            self._expand(state=state, depth=depth, node=child, player=player, randomize=False)
 
     def _search(self) -> list:
         """search publi method
@@ -187,7 +199,7 @@ class HTS:
         """
 
         # Expand the root node.
-        self._expand(state=self.state, depth=self.depth, node=self.root, player=self.player)
+        self._expand(state=self.state, depth=self.depth, node=self.root, player=self.player, randomize=True)
 
         # Search for the best move.
         result = self._search()
