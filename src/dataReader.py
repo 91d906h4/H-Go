@@ -8,7 +8,7 @@ from collections import deque
 
 
 class DataReader:
-    def __init__(self, dir_path: str, load_num: int=-1, train_ratio: float=0.8) -> None:
+    def __init__(self, dir_path: str, load_num: int=-1, train_ratio: float=0.8, augment: bool=True) -> None:
         """DataReader class
 
         Reading the SGF files and converting them to training data.
@@ -22,6 +22,7 @@ class DataReader:
         self.dir_path       = dir_path
         self.load_num       = load_num
         self.train_ratio    = train_ratio
+        self.augment        = augment
 
         # Set defualt values.
         self.raw_data       = list()
@@ -199,6 +200,10 @@ class DataReader:
 
         # Return if the augmented data is already loaded.
         if self.augmented_data: return
+
+        # Skip if data augmentation is disabled.
+        if self.augment:
+            self.augmented_data = self.converted_data
 
         # Set clock.
         start_time = time.time()
