@@ -202,8 +202,10 @@ class DataReader:
         if self.augmented_data: return
 
         # Skip if data augmentation is disabled.
-        if self.augment:
+        if not self.augment:
             self.augmented_data = self.converted_data
+
+            return
 
         # Set clock.
         start_time = time.time()
