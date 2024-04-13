@@ -126,8 +126,7 @@ class DataReader:
             if game_info[game_info.find("RE[") + 3] == "W":
                 winner = 1
             else:
-                # The black player should be -1, but we will use nn.BCELoss()
-                # to calculate the loss,  so we need to convert it to 0.
+                # Set winner to 0 if black wins.
                 winner = 0
 
             self.clear_data.append((content, winner))
@@ -292,8 +291,7 @@ class DataReader:
                 step = row * 19 + col
 
                 # Append data.
-                # We add a dimension to winner because we will use nn.BCELoss()
-                # to calculate the loss.
+                # Add a dimension to winner.
                 self.train_data.append([game_data, step, [winner]])
 
                 # Update game queue.
