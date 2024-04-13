@@ -86,8 +86,6 @@ class HTS:
             # Add random moves.
             policy = list(policy[:length]) + [random.randint(1, 361) for _ in range(self.breadth - length)]
 
-            print(policy)
-
         for step in policy:
             temp_state = state.copy()
             last_state = temp_state[-1]
