@@ -12,4 +12,5 @@ H-Go is a artificial intelligence that can playing the game of Go.
 [6] K. He, X. Zhang, S. Ren, and J. Sun, "Deep Residual Learning for Image Recognition," arXiv:1512.03385 [cs.CV], Dec. 2015. [Online]. Available: https://arxiv.org/pdf/1512.03385.pdf<br />
 [7] K. He, X. Zhang, S. Ren, and J. Sun, "Identity Mappings in Deep Residual Networks," arXiv:1603.05027 [cs.CV], Mar. 2016. [Online]. Available: https://arxiv.org/abs/1603.05027<br />
 [8] Deep Learning Training Challenges and Solutions: A Comprehensive Summary (OpenAI's ChatGPT, private communication, 10 April 2024).<br />
-[9] Featurecat, "Fox Go Dataset," GitHub. [Online]. Available: https://github.com/featurecat/go-dataset
+[9] Featurecat, "Fox Go Dataset," GitHub. [Online]. Available: https://github.com/featurecat/go-dataset<br />
+[10] DOORS 編集部, "強化学習入門 Part3 － AlphaGoZeroでも重要な技術要素！ モンテカルロ木探索の入門 －," Brainpad, Nov. 1, 2020. [Online]. Available: https://www.brainpad.co.jp/doors/contents/01_tech_2018-04-05-163000/
