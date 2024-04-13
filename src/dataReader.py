@@ -28,6 +28,7 @@ class DataReader:
         self.raw_data       = list()
         self.clear_data     = list()
         self.converted_data = list()
+        self.augmented_data = list()
         self.train_data     = list()
         self.test_data      = list()
         self.train_data_num = 0
@@ -37,6 +38,7 @@ class DataReader:
         self._read_raw_data()
         self._clear_data()
         self._convert_data()
+        self._augment_data()
         self._make_training_data()
         self._make_testing_data()
 
@@ -189,6 +191,64 @@ class DataReader:
         # Print complete message.
         print(f"Convert data completed. ({time.time() - start_time:.2f} s)")
 
+    def _augment_data(self) -> None:
+        """_augment_data private method
+
+        Augment the converted data by flipping and transposing the position.
+        The augmented data will be 8 times of the original data.
+
+        """
+
+        # Return if the augmented data is already loaded.
+        if self.augmented_data: return
+
+        # Set clock.
+        start_time = time.time()
+
+        # Set counter.
+        total = len(self.converted_data)
+        counter = 0
+
+        for game, winner in self.converted_data:
+            positions = list()
+
+            for step in game:
+                # Get row and column.
+                row, col = step
+
+                # Append original data.
+                positions.append((row, col))
+
+                # Append flipped data (flip up).
+                positions.append((18 - row, col))
+
+                # Append flipped data (flip left).
+                positions.append((row, 18 - col))
+
+                # Append flipped data (flip up and left).
+                positions.append((18 - row, 18 - col))
+
+                # Append transposed data.
+                positions.append((col, row))
+
+                # Append transposed and flipped data (flip up).
+                positions.append((18 - col, row))
+
+                # Append transposed and flipped data (flip left).
+                positions.append((row, 18 - col))
+
+                # Append transposed and flipped data (flip up and left).
+                positions.append((18 - col, 18 - col))
+
+            self.augmented_data.append((positions, winner))
+
+            # Print progress message.
+            counter += 1
+            print(f"Progess: {counter}/{total} ({counter / total * 100:.2f}%) ", end="\r")
+
+        # Print complete message.
+        print(f"Augment data completed. ({time.time() - start_time:.2f} s)")
+
     def _make_training_data(self) -> None:
         """_make_training_data private method
 
@@ -206,7 +266,7 @@ class DataReader:
         total = len(self.raw_data)
         counter = 0
 
-        for game, winner in self.converted_data:
+        for game, winner in self.augmented_data:
             # Create game board.
             game_board = np.zeros((19, 19))
 
@@ -326,3 +386,5 @@ class DataReader:
             return random.sample(population=self.test_data, k=batch_size)
         else:
             return self.test_data[:batch_size]
+
+a = DataReader("../dataset/10k", 5000)
