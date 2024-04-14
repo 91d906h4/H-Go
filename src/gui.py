@@ -1,6 +1,3 @@
-import numpy as np
-
-
 class GUI:
     def __init__(self, size: int=19, label_mode: str="num") -> None:
         """GUI class
