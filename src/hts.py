@@ -205,8 +205,17 @@ class HTS:
         # Get moves from the root node.
         moves = [child.step for child in self.root.children]
 
+        # Check this move is for which player.
+        # If it's for black, then we need to select the move with
+        # the smallest value, otherwise we need to select the move
+        # with the largest value.
+        if self.player == -1:
+            reverse = False
+        else:
+            reverse = True
+
         # Rank the moves.
-        best_move = sorted(zip(moves, result), key=lambda x: x[1], reverse=True)
-        best_move = int(best_move[0][0])
+        sorted_moves = sorted(zip(moves, result), key=lambda x: x[1], reverse=reverse)
+        best_move = int(sorted_moves[0][0])
 
         return best_move
