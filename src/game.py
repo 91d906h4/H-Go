@@ -1,4 +1,5 @@
 import torch
+import random
 
 import numpy as np
 
@@ -26,6 +27,7 @@ class Game:
         self.device     = device
 
         # Set default values.
+        self.steps      = set() # The set of visited steps.
         self.gui        = GUI(size=size, label_mode="char")
         self.game_queue = deque(maxlen=7)
         self.game_board = np.zeros((self.size, self.size))
@@ -44,10 +46,26 @@ class Game:
         """
 
         while True:
-            best_move = HTS(state=self.game_queue, depth=4, breadth=4, temperature=0.5, player=-1, model=self.model, device=self.device).get_best_move()
+            best_moves = HTS(state=self.game_queue, depth=4, breadth=4, temperature=0.5, player=-1, model=self.model, device=self.device).get_best_move()
+
+            # Set defualt AI's move to random
+            # to avoid all the moves in best_moves
+            # are invalid (visited).
+            while True:
+                if move := random.randint(0, 360) not in self.steps:
+                    ai_move = move
+                    break
+
+            for move in best_moves:
+                if move not in self.steps:
+                    ai_move = move
+                    break
+
+            # Update the set of visited steps.
+            self.steps.add(ai_move)
 
             # Calculate the row and col.
-            row, col = best_move // 19, best_move % 19
+            row, col = ai_move // 19, ai_move % 19
 
             # Update game board.
             self.game_board[row][col] = -1
@@ -57,7 +75,7 @@ class Game:
 
             # Print game board.
             print(f"AI's move: ({row}, {col})")
-            self.gui.display(self.game_board, best_move)
+            self.gui.display(self.game_board, ai_move)
             print()
 
             # Get player's move.
@@ -69,6 +87,9 @@ class Game:
             # Get row and col.
             row, col = player_move.split(",")
             row, col = int(row), int(col)
+
+            # Update the set of visited steps.
+            self.steps.add(player_move)
 
             # Update game board.
             self.game_board[row][col] = 1
