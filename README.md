@@ -20,6 +20,14 @@ pip install -r requirements.txt
 conda install --file requirements.txt
 ```
 
+## Contributing
+
+We welcome pull requests from contributors. If you plan to make significant changes, kindly open an issue beforehand to initiate a discussion on the proposed modifications.
+
+Ensure that appropriate tests are updated or added along with any changes made. 
+
+Your attention to this matter is appreciated!
+
 ## License
 
 H-Go is licensed under the [MIT license](https://github.com/91d906h4/H-Go/blob/main/LICENSE).
