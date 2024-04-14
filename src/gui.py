@@ -10,7 +10,7 @@ class GUI:
 
         """
 
-        self.size = size
+        self.size       = size
         self.label_mode = label_mode
 
     def display(self, state: list, move: int) -> None:
