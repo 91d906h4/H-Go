@@ -8,6 +8,18 @@ Go, known for its intricate rules and vast search space, has long stood as a for
 
 Driven by a combination of Convolutional Neural Networks (CNN) and Monte Carlo Tree Search (MCTS), H-Go can play the game of Go with a remarkable degree of accuracy. Through iterative self-improvement and training on vast datasets, H-Go continuously refines its gameplay strategies, adapting to diverse playing styles and evolving board states.
 
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) or [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) to install the required dependencies.
+
+```sh
+pip install -r requirements.txt
+```
+
+```sh
+conda install --file requirements.txt
+```
+
 ## License
 
 H-Go is licensed under the [MIT license](https://github.com/91d906h4/H-Go/blob/main/LICENSE).
