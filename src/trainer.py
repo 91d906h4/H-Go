@@ -16,7 +16,7 @@ class SL_Trainer:
         self.loss_fu_policy = loss_fu_policy
         self.loss_fu_value  = loss_fu_value
 
-    def train(self, data_reader: DataReader, data_num: int, batch_size: int) -> None:
+    def train(self, data_reader: DataReader, batch_size: int) -> None:
         # Set model to training mode.
         self.model.train()
 
@@ -26,7 +26,7 @@ class SL_Trainer:
             total_acc_policy    = 0
             total_acc_value     = 0
 
-            for _ in range(data_num // batch_size):
+            for _ in range(data_reader.train_data_num // batch_size):
                 # Set default datatypes.
                 policy: torch.Tensor
                 value:  torch.Tensor
@@ -69,14 +69,14 @@ class SL_Trainer:
             print(
                 f"Epoch: {epoch:03} | "
                 f"Loss of model: {total_loss:.3f} | "
-                f"Accuracy of policy: {total_acc_policy / data_num * 100:.3f}% | "
-                f"Accuracy of value: {total_acc_value / data_num * 100:.3f}%"
+                f"Accuracy of policy: {total_acc_policy / data_reader.train_data_num * 100:.3f}% | "
+                f"Accuracy of value: {total_acc_value / data_reader.train_data_num * 100:.3f}%"
             )
 
         # Set model to evaluation mode.
         self.model.eval()
 
-    def test(self, data_reader: DataReader, data_num: int, batch_size: int) -> None:
+    def test(self, data_reader: DataReader, batch_size: int) -> None:
         # Set model to evaluation mode.
         self.model.eval()
 
@@ -84,7 +84,7 @@ class SL_Trainer:
         total_acc_policy    = 0
         total_acc_value     = 0
 
-        for _ in range(data_num // batch_size):
+        for _ in range(data_reader.test_data_num // batch_size):
             # Set default datatypes.
             policy: torch.Tensor
             value:  torch.Tensor
@@ -111,8 +111,8 @@ class SL_Trainer:
 
         # Print testing information.
         print(
-            f"Accuracy of policy: {total_acc_policy / data_num * 100:.3f}% | "
-            f"Accuracy of value: {total_acc_value / data_num * 100:.3f}%"
+            f"Accuracy of policy: {total_acc_policy / data_reader.test_data_num * 100:.3f}% | "
+            f"Accuracy of value: {total_acc_value / data_reader.test_data_num * 100:.3f}%"
         )
 
 
