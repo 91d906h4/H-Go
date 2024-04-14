@@ -7,24 +7,24 @@ This repository contains 21.1 million [go](https://en.wikipedia.org/wiki/Go_(gam
 The download process took a few hours. The entire Fox Go dataset is much larger, but I couldn't manage to download everything in the few hours. Open the archives with [7-zip](http://www.7-zip.org/). Make sure to use the Extract button instead of drag and drop. The total repository size is 10.6 GB (compressed). Archives of a specific rank may also be downloaded individually through the github web interface.
 
     Pro:	10,349 games
-    9d:	    166,184 games
-    8d:	    101,206 games
-    7d:	    240,456 games
-    6d:	    600,128 games
-    5d:	    1,380,975 games
-    4d:	    2,072,142 games
-    3d:	    3,212,414 games
-    2d:	    2,634,590 games
-    1d:	    2,077,505 games
-    1k:	    1,419,433 games
-    2k:	    1,031,923 games
-    3k:	    673,703 games
-    4k:	    589,766 games
-    5k:	    554,711 games
-    6k:	    477,891 games
-    7k:	    453,212 games
-    8k:	    467,828 games
-    9k:	    464,441 games
+    9d:	166,184 games
+    8d:	101,206 games
+    7d:	240,456 games
+    6d:	600,128 games
+    5d:	1,380,975 games
+    4d:	2,072,142 games
+    3d:	3,212,414 games
+    2d:	2,634,590 games
+    1d:	2,077,505 games
+    1k:	1,419,433 games
+    2k:	1,031,923 games
+    3k:	673,703 games
+    4k:	589,766 games
+    5k:	554,711 games
+    6k:	477,891 games
+    7k:	453,212 games
+    8k:	467,828 games
+    9k:	464,441 games
     10k:	323,680 games
     11k:	254,410 games
     12k:	253,001 games
