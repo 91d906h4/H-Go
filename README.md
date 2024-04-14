@@ -20,6 +20,11 @@ pip install -r requirements.txt
 conda install --file requirements.txt
 ```
 
+## TODO
+
+- [ ] Illegal nodes (moves) pruning for HTS.
+- [ ] Illegal moves checking and stone removal for game states.
+
 ## Contributing
 
 We welcome pull requests from contributors. If you plan to make significant changes, kindly open an issue beforehand to initiate a discussion on the proposed modifications.
