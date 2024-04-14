@@ -6,11 +6,11 @@ from torch import nn
 class Block(nn.Module):
     def __init__(self, in_channels: int, out_channels: int, kernel_size: int, padding: int=1) -> None:
         super(Block, self).__init__()
-        self.conv1 = nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size, padding=padding)
-        self.bn1 = nn.BatchNorm2d(out_channels)
-        self.conv2 = nn.Conv2d(in_channels=out_channels, out_channels=out_channels, kernel_size=kernel_size, padding=padding)
-        self.bn2 = nn.BatchNorm2d(out_channels)
-        self.relu = nn.ReLU(inplace=True)
+        self.conv1  = nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size, padding=padding)
+        self.bn1    = nn.BatchNorm2d(out_channels)
+        self.conv2  = nn.Conv2d(in_channels=out_channels, out_channels=out_channels, kernel_size=kernel_size, padding=padding)
+        self.bn2    = nn.BatchNorm2d(out_channels)
+        self.relu   = nn.ReLU(inplace=True)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # Clone the input tensor.
@@ -34,9 +34,9 @@ class Block(nn.Module):
 class H_GO(nn.Module):
     def __init__(self, input_size: int, output_size: int, hidden_dim: int=128) -> None:
         super(H_GO, self).__init__()
-        self.conv1 = nn.Conv2d(in_channels=input_size, out_channels=hidden_dim, kernel_size=3)
-        self.bn1 = nn.BatchNorm2d(64)
-        self.tanh = nn.Tanh()
+        self.conv1  = nn.Conv2d(in_channels=input_size, out_channels=hidden_dim, kernel_size=3)
+        self.bn1    = nn.BatchNorm2d(64)
+        self.tanh   = nn.Tanh()
 
         self.layers = nn.Sequential(
             Block(hidden_dim, hidden_dim, 3, 1),
