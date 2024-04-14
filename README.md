@@ -8,6 +8,10 @@ Go, known for its intricate rules and vast search space, has long stood as a for
 
 Driven by a combination of Convolutional Neural Networks (CNN) and Monte Carlo Tree Search (MCTS), H-Go can play the game of Go with a remarkable degree of accuracy. Through iterative self-improvement and training on vast datasets, H-Go continuously refines its gameplay strategies, adapting to diverse playing styles and evolving board states.
 
+## License
+
+H-Go is licensed under the [MIT license](https://github.com/91d906h4/H-Go/blob/main/LICENSE).
+
 ## Reference
 
 [1] D. Silver et al., "Mastering the game of Go with deep neural networks and tree search," Nature, vol. 529, pp. 484–489, Jan. 2016.<br />
