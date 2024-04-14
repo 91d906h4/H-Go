@@ -216,6 +216,6 @@ class HTS:
 
         # Rank the moves.
         sorted_moves = sorted(zip(moves, result), key=lambda x: x[1], reverse=reverse)
-        best_move = int(sorted_moves[0][0])
+        best_moves = [int(x[0]) for x in sorted_moves]
 
-        return best_move
+        return best_moves
