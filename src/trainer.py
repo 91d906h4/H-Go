@@ -28,9 +28,9 @@ class SL_Trainer:
 
             for _ in range(data_reader.train_data_num // batch_size):
                 # Set default datatypes.
-                policy: torch.Tensor
-                value:  torch.Tensor
-                loss:   torch.Tensor
+                policy  : torch.Tensor
+                value   : torch.Tensor
+                loss    : torch.Tensor
 
                 # Get training data batch.
                 training_batch = data_reader.get_training_batch(batch_size=batch_size, shuffle=True)
