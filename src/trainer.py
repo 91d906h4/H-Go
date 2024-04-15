@@ -113,7 +113,7 @@ class SL_Trainer:
             # Test model every n epoch.
             if test_every_epoch <= 0:
                 continue
-            elif epoch % test_every_epoch == 0:
+            elif (epoch + 1) % test_every_epoch == 0:
                 self.test(data_reader, batch_size)
 
         # Set model to evaluation mode.
