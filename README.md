@@ -35,7 +35,7 @@ Your attention to this matter is appreciated!
 
 ## License
 
-H-Go is licensed under the [MIT license](https://github.com/91d906h4/H-Go/blob/main/LICENSE).
+H-Go is licensed under the [PROPRIETARY LICENSE](https://github.com/91d906h4/H-Go/blob/main/LICENSE), which prohibits any use, copying, modification, or distribution of the software without explicit written permission from the copyright holder.
 
 ## Reference
 
