@@ -9,6 +9,20 @@ from dataReader import DataReader
 
 class SL_Trainer:
     def __init__(self, epochs: int, model: H_GO, device: torch.device, optimizer: optim.RAdam, loss_fu_policy: nn.CrossEntropyLoss, loss_fu_value: nn.BCELoss) -> None:
+        """SL_Trainer class
+
+        The supervised learning trainer class for H-Go.
+
+        Args:
+            epochs (int): The number of epochs.
+            model (H_GO): The AI model.
+            device (torch.device): The device of the model.
+            optimizer (optim.RAdam): The optimizer of the model.
+            loss_fu_policy (nn.CrossEntropyLoss): The loss function for policy.
+            loss_fu_value (nn.BCELoss): The loss function for value.
+
+        """
+
         self.epochs         = epochs
         self.model          = model
         self.device         = device
@@ -17,6 +31,17 @@ class SL_Trainer:
         self.loss_fu_value  = loss_fu_value
 
     def train(self, data_reader: DataReader, batch_size: int, test_every_epoch: int=-1) -> None:
+        """train public method
+        
+        Trainer for H-Go model.
+
+        Args:
+            data_reader (DataReader): The data reader.
+            batch_size (int): The batch size.
+            test_every_epoch (int, optional): Test model every n epochs. (default: -1)
+
+        """
+
         # Set model to training mode.
         self.model.train()
 
@@ -84,6 +109,16 @@ class SL_Trainer:
 
     @torch.no_grad()
     def test(self, data_reader: DataReader, batch_size: int) -> None:
+        """test public method
+        
+        Tester for H-Go model.
+
+        Args:
+            data_reader (DataReader): The data reader.
+            batch_size (int): The batch size.
+
+        """
+
         # Set default value.
         total_acc_policy    = 0
         total_acc_value     = 0
