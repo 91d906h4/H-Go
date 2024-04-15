@@ -34,7 +34,7 @@ class Block(nn.Module):
 
 
 class Attention(nn.Module):
-    def __init__(self, in_channels: int, out_channels: int, kernel_size: int, padding: int, bias: bool=False):
+    def __init__(self, in_channels: int, out_channels: int, kernel_size: int, padding: int, bias: bool=False) -> None:
         super(Attention, self).__init__()
         self.out_channels   = out_channels
         self.kernel_size    = kernel_size
