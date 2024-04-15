@@ -4,9 +4,9 @@ H-Go is a artificial intelligence for the game of Go.
 
 ## Introduction
 
-Go, known for its intricate rules and vast search space, has long stood as a formidable challenge for AI systems in the past. And H-Go leverages machine learning algorithms and simple decision-making strategies to achieve human performance levels.
+In the realm of board games, Go has posed a profound challenge for AI systems due to its intricate rules and expansive search space. H-Go, with its approach, utilizes machine learning algorithms and straightforward decision-making strategies to approach human-level performance.
 
-Driven by a combination of Convolutional Neural Networks (CNN) and Monte Carlo Tree Search (MCTS), H-Go can play the game of Go with a remarkable degree of accuracy. Through iterative self-improvement and training on vast datasets, H-Go continuously refines its gameplay strategies, adapting to diverse playing styles and evolving board states.
+Powered by a blend of Convolutional Neural Networks (CNN), Self-Attention mechanisms, and Monte Carlo Tree Search (MCTS), H-Go demonstrates competent gameplay in the complex world of Go. Through ongoing self-improvement iterations and training on extensive datasets, H-Go continuously hones its gameplay tactics, adapting to diverse playing styles and evolving board situations.
 
 ## Installation
 
