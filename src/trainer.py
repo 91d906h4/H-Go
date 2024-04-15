@@ -16,7 +16,7 @@ class SL_Trainer:
         self.loss_fu_policy = loss_fu_policy
         self.loss_fu_value  = loss_fu_value
 
-    def train(self, data_reader: DataReader, batch_size: int) -> None:
+    def train(self, data_reader: DataReader, batch_size: int, test_every_epoch: int=-1) -> None:
         # Set model to training mode.
         self.model.train()
 
@@ -73,13 +73,17 @@ class SL_Trainer:
                 f"Accuracy of value: {total_acc_value / data_reader.train_data_num * 100:.3f}%"
             )
 
+            # Test model every n epoch.
+            if test_every_epoch == -1:
+                continue
+            elif test_every_epoch % epoch == 0:
+                self.test(data_reader, batch_size)
+
         # Set model to evaluation mode.
         self.model.eval()
 
+    @torch.no_grad()
     def test(self, data_reader: DataReader, batch_size: int) -> None:
-        # Set model to evaluation mode.
-        self.model.eval()
-
         # Set default value.
         total_acc_policy    = 0
         total_acc_value     = 0
