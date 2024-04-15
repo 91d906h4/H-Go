@@ -52,7 +52,7 @@ Your attention to this matter is appreciated!
 
 H-Go is licensed under the [PROPRIETARY LICENSE](https://github.com/91d906h4/H-Go/blob/main/LICENSE), which prohibits any use, copying, modification, or distribution of the software without explicit written permission from the copyright holder.
 
-## Reference
+## References
 
 [1] D. Silver et al., "Mastering the game of Go with deep neural networks and tree search," Nature, vol. 529, pp. 484–489, Jan. 2016.<br />
 [2] D. Silver et al., "Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm," arXiv:1712.01815 [cs.AI], Dec. 2017. [Online]. Available: https://doi.org/10.48550/arXiv.1712.01815<br />
@@ -66,4 +66,8 @@ H-Go is licensed under the [PROPRIETARY LICENSE](https://github.com/91d906h4/H-G
 [10] DOORS 編集部, "強化学習入門 Part3 － AlphaGoZeroでも重要な技術要素！ モンテカルロ木探索の入門 －," Brainpad, Nov. 1, 2020. [Online]. Available: https://www.brainpad.co.jp/doors/contents/01_tech_2018-04-05-163000/<br />
 [11] leaderj1001, "Implementing Stand-Alone Self-Attention in Vision Models using Pytorch," GitHub. [Online]. Available: https://github.com/leaderj1001/Stand-Alone-Self-Attention/<br />
 [12] P. Ramachandran et al., "Stand-Alone Self-Attention in Vision Models," arXiv:1906.05909 [cs.CV], Jun. 2019. [Online]. Available: https://arxiv.org/abs/1906.05909<br />
-[13] Y. Yan, J. Kawahara, and G. Hamarneh, "Melanoma Recognition via Visual Attention," in Information Processing in Medical Imaging (IPMI 2019), pp. 793-804, May 2019.
+[13] Y. Yan, J. Kawahara, and G. Hamarneh, "Melanoma Recognition via Visual Attention," in Information Processing in Medical Imaging (IPMI 2019), pp. 793-804, May 2019.<br />
+[14] J. Hui, "Monte Carlo Tree Search (MCTS) in AlphaGo Zero," Medium, May 20, 2018. [Online]. Available: https://jonathan-hui.medium.com/monte-carlo-tree-search-mcts-in-alphago-zero-8a403588276a<br />
+[15] J. Hui, "AlphaGo Zero — a game changer. (How it works?)" Medium, May 17, 2018. [Online]. Available: https://jonathan-hui.medium.com/alphago-zero-a-game-changer-14ef6e45eba5<br />
+[16] M. Zhong, "蒙特卡洛树搜索（MCTS）代码详解【python】," CSDN, Mar. 23, 2019. [Online]. Available: https://blog.csdn.net/windowsyun/article/details/88770799<br />
+[17] F. Opolka, "Single-Player Monte-Carlo Tree Search," GitHub, Jun. 25, 2021. [Online]. Available: https://github.com/FelixOpolka/Single-Player-MCTS/
