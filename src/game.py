@@ -46,7 +46,11 @@ class Game:
         """
 
         while True:
-            best_moves = HTS(state=self.game_queue, depth=4, breadth=4, temperature=0.5, player=-1, model=self.model, device=self.device).get_best_move()
+            # Initialize HTS.
+            hts = HTS(state=self.game_queue, depth=4, breadth=4, temperature=0.5, player=-1, model=self.model, device=self.device)
+
+            # Get bets moves from HTS.
+            best_moves = hts.get_best_move()
 
             # Set defualt AI's move to random
             # to avoid all the moves in best_moves
@@ -56,6 +60,9 @@ class Game:
                     ai_move = move
                     break
 
+            # Select the best move from outputs of HTS.
+            # If the best move is in the visited steps,
+            # then select another move.
             for move in best_moves:
                 if move not in self.steps:
                     ai_move = move
