@@ -24,6 +24,7 @@ conda install --file requirements.txt
 
 - [ ] Illegal nodes (moves) pruning for HTS.
 - [ ] Illegal moves checking and stone removal for game states.
+- [ ] Value network overfitting.
 
 ## Contributing
 
