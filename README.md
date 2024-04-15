@@ -65,4 +65,5 @@ H-Go is licensed under the [PROPRIETARY LICENSE](https://github.com/91d906h4/H-G
 [9] Featurecat, "Fox Go Dataset," GitHub. [Online]. Available: https://github.com/featurecat/go-dataset<br />
 [10] DOORS 編集部, "強化学習入門 Part3 － AlphaGoZeroでも重要な技術要素！ モンテカルロ木探索の入門 －," Brainpad, Nov. 1, 2020. [Online]. Available: https://www.brainpad.co.jp/doors/contents/01_tech_2018-04-05-163000/<br />
 [11] leaderj1001, "Implementing Stand-Alone Self-Attention in Vision Models using Pytorch," GitHub. [Online]. Available: https://github.com/leaderj1001/Stand-Alone-Self-Attention/<br />
-[12] P. Ramachandran et al., "Stand-Alone Self-Attention in Vision Models," arXiv:1906.05909 [cs.CV], Jun. 2019. [Online]. Available: https://arxiv.org/abs/1906.05909
+[12] P. Ramachandran et al., "Stand-Alone Self-Attention in Vision Models," arXiv:1906.05909 [cs.CV], Jun. 2019. [Online]. Available: https://arxiv.org/abs/1906.05909<br />
+[13] Y. Yan, J. Kawahara, and G. Hamarneh, "Melanoma Recognition via Visual Attention," in Information Processing in Medical Imaging (IPMI 2019), pp. 793-804, May 2019.
