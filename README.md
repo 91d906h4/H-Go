@@ -20,6 +20,20 @@ pip install -r requirements.txt
 conda install --file requirements.txt
 ```
 
+## Usage
+
+1. Setting Hyper-Parameters
+
+Navigate to the `./src/hyperparameters.py` file and adjust the settings according to your requirements. This file contains essential configurations and parameters that influence the behavior and performance of the model. By modifying these settings, you can tailor the model's behavior to suit specific use cases and optimize its performance for desired outcomes.
+
+2. Run program
+
+To begin, navigate to the `./src/main.ipynb` file and execute the notebook by selecting the "Run" option. Ensure that all required modules are correctly imported and that the parameters are appropriately configured. Upon execution, the notebook will initiate the training process for the model.
+
+3. Play with model
+
+Once the training is complete, you will have the opportunity to interact with the trained model directly within the notebook interface, located at the bottom of the file. Explore the functionalities and capabilities of the model to gain insights and assess its performance.
+
 ## TODO
 
 - [ ] Illegal nodes (moves) pruning for HTS.
