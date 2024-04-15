@@ -1,3 +1,4 @@
+import time
 import torch
 
 import numpy as np
@@ -50,8 +51,10 @@ class SL_Trainer:
             total_loss          = 0
             total_acc_policy    = 0
             total_acc_value     = 0
+            start_time          = time.time()
+            batch_num           = data_reader.train_data_num // batch_size
 
-            for _ in range(data_reader.train_data_num // batch_size):
+            for batch in range(batch_num):
                 # Set default datatypes.
                 policy  : torch.Tensor
                 value   : torch.Tensor
@@ -90,12 +93,21 @@ class SL_Trainer:
                 loss.backward()
                 self.optimizer.step()
 
+                # Print training progress.
+                print(
+                    f"Epoch: {epoch:03} | "
+                    f"Time: {time.time() - start_time:.3f} | "
+                    f"Progress: {batch / batch_num * 100:.3f}%",
+                    end="\r"
+                )
+
             # Print training information.
             print(
                 f"Epoch: {epoch:03} | "
+                f"Time: {time.time() - start_time:.3f} | "
                 f"Loss of model: {total_loss:.3f} | "
-                f"Accuracy of policy: {total_acc_policy / data_reader.train_data_num * 100:.3f}% | "
-                f"Accuracy of value: {total_acc_value / data_reader.train_data_num * 100:.3f}%"
+                f"Train accuracy of policy: {total_acc_policy / data_reader.train_data_num * 100:.3f}% | "
+                f"Train accuracy of value: {total_acc_value / data_reader.train_data_num * 100:.3f}%"
             )
 
             # Test model every n epoch.
@@ -122,8 +134,10 @@ class SL_Trainer:
         # Set default value.
         total_acc_policy    = 0
         total_acc_value     = 0
+        start_time          = time.time()
+        batch_num           = data_reader.test_data_num // batch_size
 
-        for _ in range(data_reader.test_data_num // batch_size):
+        for batch in range(batch_num):
             # Set default datatypes.
             policy: torch.Tensor
             value:  torch.Tensor
@@ -148,10 +162,19 @@ class SL_Trainer:
             total_acc_policy += torch.sum(policy.argmax(1) == step).item()
             total_acc_value += torch.sum(torch.round(value) == winner).item()
 
+            # Print training progress.
+            print(
+                f"Time: {time.time() - start_time:.3f} | "
+                f"Progress: {batch / batch_num * 100:.3f}%",
+                end="\r"
+            )
+
         # Print testing information.
         print(
-            f"Accuracy of policy: {total_acc_policy / data_reader.test_data_num * 100:.3f}% | "
-            f"Accuracy of value: {total_acc_value / data_reader.test_data_num * 100:.3f}%"
+            f"Test | "
+            f"Time: {time.time() - start_time:.3f} | "
+            f"Test accuracy of policy: {total_acc_policy / data_reader.test_data_num * 100:.3f}% | "
+            f"Test accuracy of value: {total_acc_value / data_reader.test_data_num * 100:.3f}%"
         )
 
 
