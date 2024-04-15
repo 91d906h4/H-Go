@@ -22,7 +22,7 @@ conda install --file requirements.txt
 
 ## Usage
 
-1. Setting Hyper-Parameters
+1. Set Hyper-Parameters
 
 Navigate to the `./src/hyperparameters.py` file and adjust the settings according to your requirements. This file contains essential configurations and parameters that influence the behavior and performance of the model. By modifying these settings, you can tailor the model's behavior to suit specific use cases and optimize its performance for desired outcomes.
 
