@@ -1,5 +1,7 @@
 import torch
 
+import torch.nn.functional as F
+
 from torch import nn
 
 
@@ -31,6 +33,60 @@ class Block(nn.Module):
         return x
 
 
+class Attention(nn.Module):
+    def __init__(self, in_channels: int, out_channels: int, kernel_size: int, padding: int, bias: bool=False):
+        super(Attention, self).__init__()
+        self.out_channels   = out_channels
+        self.kernel_size    = kernel_size
+        self.padding        = padding
+
+        self.rel_h          = nn.Parameter(torch.randn(out_channels // 2, 1, 1, kernel_size, 1), requires_grad=True)
+        self.rel_w          = nn.Parameter(torch.randn(out_channels // 2, 1, 1, 1, kernel_size), requires_grad=True)
+        self.query          = nn.Conv2d(in_channels, out_channels, kernel_size=1, bias=bias)
+        self.key            = nn.Conv2d(in_channels, out_channels, kernel_size=1, bias=bias)
+        self.value          = nn.Conv2d(in_channels, out_channels, kernel_size=1, bias=bias)
+        self.softmax        = nn.Softmax(dim=-1)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        # Set defualt datatypes.
+        query   : torch.Tensor
+        key     : torch.Tensor
+        value   : torch.Tensor
+
+        # Get the shape of x.
+        batch, channels, height, width = x.size()
+
+        # Pad x.
+        x_pad = F.pad(input=x, pad=(self.padding, self.padding, self.padding, self.padding), value=0)
+
+        # Calculate query, key and value.
+        query   = self.query(x)
+        key     = self.key(x_pad)
+        value   = self.value(x_pad)
+
+        query   = query.view(batch, 1, self.out_channels, height, width, 1)
+
+        key     = key.unfold(2, self.kernel_size, 1)
+        value   = value.unfold(2, self.kernel_size, 1)
+
+        key     = key.unfold(3, self.kernel_size, 1)
+        value   = value.unfold(3, self.kernel_size, 1)
+
+        key_h, key_w = key.split(self.out_channels // 2, dim=1)
+        key     = torch.cat((key_h + self.rel_h, key_w + self.rel_w), dim=1)
+
+        key     = key.reshape(batch, 1, self.out_channels, height, width, -1)
+        value   = value.reshape(batch, 1, self.out_channels, height, width, -1)
+
+        output = query * key
+        output = self.softmax(output)
+
+        output = torch.einsum('...wk, ...wk -> ...w', output, value)
+        output = output.view(batch, -1, height, width)
+
+        return output
+
+
 class H_GO(nn.Module):
     def __init__(self, input_size: int, output_size: int, hidden_dim: int=128) -> None:
         super(H_GO, self).__init__()
@@ -51,6 +107,8 @@ class H_GO(nn.Module):
             Block(hidden_dim, hidden_dim, 3, 1),
             Block(hidden_dim, hidden_dim, 3, 1),
         )
+
+        self.attention = Attention(in_channels=hidden_dim, out_channels=hidden_dim, kernel_size=3, padding=1)
 
         self.policy = nn.Sequential(
             nn.Conv2d(in_channels=hidden_dim, out_channels=2, kernel_size=1),
@@ -77,6 +135,9 @@ class H_GO(nn.Module):
         x = self.tanh(x)
 
         x = self.layers(x)
+
+        # Attention network.
+        x = self.attention(x)
 
         # Policy network.
         policy = self.policy(x)
