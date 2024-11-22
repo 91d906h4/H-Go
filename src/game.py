@@ -81,7 +81,7 @@ class Game:
             self.game_queue.append(self.game_board.copy())
 
             # Print game board.
-            print(f"AI's move: ({row}, {col})")
+            print(f"AI's move: ({row + 1}, {col + 1})")
             self.gui.display(self.game_board, ai_move)
             print()
 
@@ -94,6 +94,7 @@ class Game:
             # Get row and col.
             row, col = player_move.split(",")
             row, col = int(row), int(col)
+            row, col = row - 1, col - 1
 
             # Update the set of visited steps.
             self.steps.add(player_move)
